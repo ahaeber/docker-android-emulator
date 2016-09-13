@@ -2,7 +2,7 @@ FROM andyandy/android-ci:latest
 MAINTAINER Andreas Häber <andreas.haber@intele.com>
 
 # Install all dependencies
-ONBUILD RUN apt-get update && \
+RUN apt-get update && \
     apt-get install -y redir && \
     apt-get clean && \
     apt-get autoclean && \
@@ -25,10 +25,10 @@ ADD android-wait-for-emulator.sh /wait-for-emulator.sh
 RUN chmod +x /wait-for-emulator.sh
 
 # Install dependencies for emulator
-ONBUILD RUN echo y | android update sdk --no-ui --all -t `android list sdk --all|grep "SDK Platform Android 4.3.1, API 18"|awk -F'[^0-9]*' '{print $2}'` && \
+RUN echo y | android update sdk --no-ui --all -t `android list sdk --all|grep "SDK Platform Android 4.3.1, API 18"|awk -F'[^0-9]*' '{print $2}'` && \
             echo y | android update sdk --no-ui --all --filter sys-img-armeabi-v7a-android-18 --force && \
             echo y | android update sdk --no-ui --all --filter sys-img-x86-android-18 --force
 
 # Create emulators
-ONBUILD RUN echo n | android create avd --force -n "x86" -t android-18 --abi default/x86
-ONBUILD RUN echo n | android create avd --force -n "arm" -t android-18 --abi default/armeabi-v7a
+RUN echo n | android create avd --force -n "x86" -t android-18 --abi default/x86
+RUN echo n | android create avd --force -n "arm" -t android-18 --abi default/armeabi-v7a
