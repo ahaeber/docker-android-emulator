@@ -1,4 +1,4 @@
-FROM andyandy/docker-android:latest
+FROM andyandy/android-ci:latest
 MAINTAINER Andreas Häber <andreas.haber@intele.com>
 
 # Install all dependencies
